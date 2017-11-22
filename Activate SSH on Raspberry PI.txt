@@ -1,0 +1,20 @@
+https://www.raspberrypi.org/documentation/remote-access/ssh/
+
+Enable SSH
+
+1.
+
+Launch Raspberry Pi Configuration from the Preferences menu
+Navigate to the Interfaces tab
+Select Enabled next to SSH
+Click OK
+
+
+2.Alternatively, raspi-config can be used:
+
+Enter sudo raspi-config in a terminal window
+Select Interfacing Options
+Navigate to and select SSH
+Choose Yes
+Select Ok
+Choose Finish

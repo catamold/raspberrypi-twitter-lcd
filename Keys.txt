@@ -1,0 +1,6 @@
+https://apps.twitter.com
+
+Consumer Key (API Key)	5Eok4J7w2UvOzzjxoIoQrmw3R
+Consumer Secret (API Secret)	jCQT2tKt44LjNbYqBuZkNdXUbEKum4aFTJ9PBrWos8nC68PeRu
+Access Token	2458501699-4rnvybDyCndQjLS38sw5wlBNdIfiEettqvhvZOv
+Access Token Secret	p9LVT4LWQYqkuqbsNUiJjV4wpdUMY53s1cnEUIbyVQmpB
