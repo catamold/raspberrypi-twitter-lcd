@@ -10,5 +10,7 @@ E-mail: catalin.moldovan97@gmail.com
 GitHub: https://github.com/catamold/raspberrypi-twitter-lcd
 
 Technical University of Cluj-Napoca
+
 Facultatea de Automatica si Calculatoare
+
 Departamentul de Calculatoare
