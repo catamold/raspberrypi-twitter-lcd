@@ -39,13 +39,47 @@ try:
         allText = tweetUser+": "+tweetText
         print allText
 
-         for i in range(count):
-             textToWrite = allText[32*i : 32*(i+1)]
-             print textToWrite
-             time.sleep(5)
-             lcd.clear()
-             lcd.write_string(textToWrite)
-			 
+        file = open('rudewords.txt','r')
+        line = file.readline()
+        rudewcount = 0
+        while line:
+            line = file.readline()
+            rudewcount += 1
+        file.close()
+
+        file = open('rudewords.txt','r')
+        line = file.readline()
+        rudew = [None]*(rudewcount)
+        i = 0
+        while line:
+            rudew [i] = line
+            line = file.readline()
+            i += 1
+        file.close()
+
+        allow = 1
+        splittext = tweetText.split(" ")
+        textcount = len(splittext)
+
+        for i in range(0,rudewcount):
+            if rudew [i][len(rudew [i])-1] == "\n":
+                rudew [i] = rudew [i][:len(rudew [i])-1]
+
+        for i in range(0,textcount):
+                for j in range (0,rudewcount):
+                        if splittext [i] == rudew [j]:
+                                allow = 0
+                                break
+                        else:
+                                continue
+                                
+        if allow == 1:
+             for i in range(count):
+                 textToWrite = allText[32*i : 32*(i+1)]
+                 print textToWrite
+                 time.sleep(5)
+                 lcd.clear()
+                 lcd.write_string(textToWrite)	 
         time.sleep(10);
 		
 except KeyboardInterrupt:
