@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 lcd = CharLCD(numbering_mode=GPIO.BOARD, pin_rs=26, pin_e=24, pins_data=[22, 18, 16, 12])
 
-api=twitter.Api(consumer_key='5Eok4J7w2UvOzzjxoIoQrmw3R',
+api = twitter.Api(consumer_key='5Eok4J7w2UvOzzjxoIoQrmw3R',
 	consumer_secret='jCQT2tKt44LjNbYqBuZkNdXUbEKum4aFTJ9PBrWos8nC68PeRu',
 	access_token_key='2458501699-4rnvybDyCndQjLS38sw5wlBNdIfiEettqvhvZOv',
 	access_token_secret='p9LVT4LWQYqkuqbsNUiJjV4wpdUMY53s1cnEUIbyVQmpB')
@@ -80,7 +80,7 @@ try:
                  time.sleep(5)
                  lcd.clear()
                  lcd.write_string(textToWrite)	 
-        time.sleep(10);
+        time.sleep(10)
 		
 except KeyboardInterrupt:
     pass
