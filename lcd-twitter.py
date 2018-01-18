@@ -14,12 +14,14 @@ import time
 import HTMLParser
 import RPi.GPIO as GPIO
 
+GPIO.setwarnings(False)
+
 lcd = CharLCD(numbering_mode=GPIO.BOARD, pin_rs=26, pin_e=24, pins_data=[22, 18, 16, 12])
 
-api = twitter.Api(consumer_key='5Eok4J7w2UvOzzjxoIoQrmw3R',
-	consumer_secret='jCQT2tKt44LjNbYqBuZkNdXUbEKum4aFTJ9PBrWos8nC68PeRu',
-	access_token_key='2458501699-4rnvybDyCndQjLS38sw5wlBNdIfiEettqvhvZOv',
-	access_token_secret='p9LVT4LWQYqkuqbsNUiJjV4wpdUMY53s1cnEUIbyVQmpB')
+api = twitter.Api(consumer_key='oVXAYUbej3bI11JJ7SUJzbU8H',
+	consumer_secret='z5W098nv50E819lpZjTssJX4ldapQFZUSZDFQr4JHhzJvwxnKx',
+	access_token_key='953957604451024897-Qmc5yDPXXx3QEFpmW02kuXSOPhmi61S',
+	access_token_secret='QqdkH9bGyiZEEsAb9ko4ez3cJck9VjKDQgJdsMrLLW5lP')
 
 htmlParser = HTMLParser.HTMLParser()
 lcd.clear()
@@ -30,11 +32,13 @@ lcd.clear()
 try:
     while True:
         print "Cautare twitter..."
+        lcd.clear()
+        lcd.write_string("Finding tweets")
         try:
             homeTimeline=api.GetHomeTimeline(count=1)
         except:
             lcd.clear()
-            lcd.write_string("Eroare se reincearca conexiunea...")
+            lcd.write_string("Eroare conexiune")
             continue
         print "Tweet gasit..."
 		
@@ -42,10 +46,16 @@ try:
         tweetText = homeTimeline[0].text
         tweetText = htmlParser.unescape(tweetText)
         tweetText = tweetText.replace('\n',' ')
-        
-        count = (len(tweetUser) + len(tweetText) + 2) / 32
-        print count
+
         allText = tweetUser+": "+tweetText
+        if "https://" in allText: 
+            for i in range(len(allText)-8):
+                if allText[i:i+8] == "https://":
+                    allText = allText[:i] + "<link>"
+        #count = (len(tweetUser) + len(tweetText) + 2) / 32
+        count = len(allText) / 32
+        count += 1
+        print count
         print allText
 
         file = open('rudewords.txt','r')
@@ -86,13 +96,16 @@ try:
              for i in range(count):
                  textToWrite = allText[32*i : 32*(i+1)]
                  print textToWrite
-                 time.sleep(5)
+                 firstText = textToWrite[:16]
+                 lastText = textToWrite[16:32]
+                 textToWrite = firstText + "    " + lastText
+                 time.sleep(3)
                  lcd.clear()
                  lcd.write_string(textToWrite)	 
-        time.sleep(10)
+        time.sleep(3)
 		
 except KeyboardInterrupt:
     pass
 finally:
     lcd.clear()
-    lcd.write_string("Termianre program")
+    lcd.write_string("END Connection")
