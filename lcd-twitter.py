@@ -74,7 +74,7 @@ try:
                         aux = 0
                         break
                 if aux == 1:
-                    twitterName[countHashtag] = tweetUser
+                    twitterName[countHashtag] = "@" + tweetUser
                     countHashtag += 1
         print "%s: %d" % (hashtag,countHashtag)
         for i in range (countHashtag):
