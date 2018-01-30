@@ -1,0 +1,9 @@
+Food: spagetti, ice-cream, fries, onion, hamburger, tea, bread
+Cars: Hyundai, BMW, Logan, Dacia, Porsche
+Technology: apple, iPhone, PC, Laptop, TV, mouse, mobile, phone
+Music: music, album, iTunes, Spotify, Winamp, YouTube
+Clothes: skirt, trouser, cap, socks, shirt, jeans
+Countries: Romania, England, Britain, France, Austria, Australia, Hungary, Slovakia, Ukraine, Bulgaria, Italy, Germany, Poland, Belgium, Spain
+Animals: cat, dog, pig, bear, panda, lion, monkey, cow, wolf, elephant
+Jobs: doctor, IT, accountant, actor, artist, pilot, lawyer, officer, writer, nurse, waiter
+
