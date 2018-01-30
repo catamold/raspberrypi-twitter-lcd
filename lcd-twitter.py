@@ -19,10 +19,10 @@ GPIO.setwarnings(False)
 
 lcd = CharLCD(numbering_mode=GPIO.BOARD, pin_rs=26, pin_e=24, pins_data=[22, 18, 16, 12])
 
-api = twitter.Api(consumer_key='BEAwnAZfPNRRhYY0Q033mexo0',
-	consumer_secret='PmSPXvtMA55kksFWNHjpMOpe8hOLXyqgQsEVPuR75oq9rz1VuZ',
-	access_token_key='2458501699-tdl901yBFOVKhUBwDMrsCEMN6pODSR0OWu3oaxw',
-	access_token_secret='D8cvt3hVTtm3CjcXxKwH1BOrdy9yM8XtpJOa5oTAQYqXp')
+api=twitter.Api(consumer_key='8vqGlwuINs6bzySYf5F9LPh7f',
+	consumer_secret='P5xBbNVFDI6F1oBmuZ6HyOEvBZ9DPqt5K32Vt4xUuyPqZ0vzg5',
+	access_token_key='953957604451024897-l7Gd3zKHqfIuUPfaE3B0hpXvrSql0Q0',
+	access_token_secret='cXDD3ckPbGZnmDtFxG1rNS65JgTNsLriw4YML1DYGDumm')
 
 htmlParser = HTMLParser.HTMLParser()
 lcd.clear()
@@ -34,7 +34,8 @@ hashtag = "#BeStrongRO"
 countHashtag = 0
 twitterName = [None]*10
 words = 280
-        
+fileTweet = open('TweetPost.txt', 'w')
+    
 try:
     while True:
         print "Cautare twitter..."
@@ -74,11 +75,11 @@ try:
                         aux = 0
                         break
                 if aux == 1:
-                    twitterName[countHashtag] = "@" + tweetUser
+                    twitterName[countHashtag] = tweetUser
                     countHashtag += 1
         print "%s: %d" % (hashtag,countHashtag)
         for i in range (countHashtag):
-            sys.stdout.write ("%s " % (twitterName[i]))            
+            sys.stdout.write ("@%s " % (twitterName[i]))            
 
         file = open('rudewords.txt','r')
         line = file.readline()
@@ -113,7 +114,46 @@ try:
                                 break
                         else:
                                 continue
-                                
+
+
+        fileTweet.write (allText + "( ")
+
+        
+        file = open('Categories.txt','r')
+        line = file.readline()
+        categoriesno = 0
+        while line:
+            line = file.readline()
+            categoriesno += 1
+        file.close()
+
+        file = open('Categories.txt','r')
+        line = file.readline()
+        lineRead = [None]*(categoriesno)
+        categories = [None]*(categoriesno)
+        i = 0
+        while line:
+            lineRead [i] = line
+            line = file.readline()
+            i += 1
+        file.close()
+        
+        for i in range(0,categoriesno):
+            for j in range(len(lineRead [i])):
+                if lineRead[i][j] == ":":
+                    categories [i] = lineRead [i][:j]
+                    subcat = j
+                if lineRead[i][j] == ",":
+                    subcategories = lineRead [i][subcat+2:j]
+                    subcat = j
+                    for k in range(0,textcount):
+                        if splittext [k] == subcategories:
+                            fileCategories = open(categories [i] + '.txt', 'w')
+                            fileCategories.write (tweetUser + ": " + allText + '\n')
+                            fileTweet.write (subcategories + " ")
+
+        fileTweet.write (")")
+	print " "
         if allow == 1:
              for i in range(count):
                  textToWrite = allText[32*i : 32*(i+1)]
@@ -131,17 +171,14 @@ except KeyboardInterrupt:
 finally:
     lcd.clear()
     lcd.write_string("END Connection")
-
-    fileTweet = open('TweetPost.txt', 'w')
     tweetPost = "Our " + hashtag + " campain has " + str(countHashtag) + " tweets. THANKS TO: "
     others = 0
     for i in range (countHashtag):
         if len(tweetPost) + len(twitterName[i]) + 1 < words - 15:
-            tweetPost = tweetPost + twitterName[i] + " "
+            tweetPost = tweetPost + "@" + twitterName[i] + " "
         else:
             others = 1
     if others == 1:
         tweetPost = tweetPost + "and many others"
-    fileTweet.write (tweetPost)
     api.PostUpdate (tweetPost)
     fileTweet.close()
