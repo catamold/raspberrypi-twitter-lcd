@@ -150,7 +150,7 @@ try:
                         if splittext [k] == subcategories:
                             fileCategories = open(categories [i] + '.txt', 'w')
                             fileCategories.write (tweetUser + ": " + allText + '\n')
-                            fileTweet.write (subcategories + " ")
+                            fileTweet.write (categories [i] + " ")
 
         fileTweet.write (")")
 	print " "
