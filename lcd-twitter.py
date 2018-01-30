@@ -116,8 +116,8 @@ try:
                                 continue
 
 
-        fileTweet.write (allText + "( ")
-
+        fileTweet.write (allText)
+		fileTweet.write ("( ")
         
         file = open('Categories.txt','r')
         line = file.readline()
@@ -148,12 +148,12 @@ try:
                     subcat = j
                     for k in range(0,textcount):
                         if splittext [k] == subcategories:
-                            fileCategories = open(categories [i] + '.txt', 'w')
-                            fileCategories.write (tweetUser + ": " + allText + '\n')
+                            fileCategories = open(categories [i] + '.txt', 'a')
+                            fileCategories.write (allText + "   \n")
                             fileTweet.write (categories [i] + " ")
 
         fileTweet.write (")")
-	print " "
+		print " "
         if allow == 1:
              for i in range(count):
                  textToWrite = allText[32*i : 32*(i+1)]
